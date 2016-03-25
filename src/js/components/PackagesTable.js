@@ -161,10 +161,10 @@ class PackagesTable extends mixin(StoreMixin) {
   }
 
   getUpgradeCell(prop, cosmosPackage) {
-    let uninstallButton = this.getUninstallButton(cosmosPackage);
+    let uninstallButton = null;
 
-    if (cosmosPackage.isUpgrading()) {
-      uninstallButton = null;
+    if (!cosmosPackage.isUpgrading()) {
+      uninstallButton = this.getUninstallButton(cosmosPackage);
     }
 
     return (
