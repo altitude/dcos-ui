@@ -138,6 +138,11 @@ class UniversePackage extends Item {
     return this._isDecisionPointActive;
   }
 
+  isPromoted() {
+    return this.get('promoted');
+
+  }
+
   isUpgradeAvailable() {
     return this._isUpgradeAvailable;
   }
