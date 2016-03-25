@@ -43,11 +43,23 @@ class UniversePackage extends Item {
     );
   }
 
+  getName() {
+    return this.get('packageDefinition').name;
+  }
+
   getScreenshots() {
     return Util.findNestedPropertyInObject(
       this.get('resource'),
       'images.screenshots'
     );
+  }
+
+  getUpgradeVersions() {
+    return ['0.1.0', '0.1.5', '0.2.0', '0.2.5'];
+  }
+
+  getVersion() {
+    return this.get('packageDefinition').version;
   }
 
   // TODO (John): Use actual data.
