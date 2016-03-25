@@ -9,11 +9,13 @@ import {StoreMixin} from 'mesosphere-shared-reactjs';
 import CosmosMessages from '../constants/CosmosMessages';
 import CosmosPackagesStore from '../stores/CosmosPackagesStore';
 import PackagesTableHeaderLabels from '../constants/PackagesTableHeaderLabels';
+import PackageUpgradeOverview from './PackageUpgradeOverview';
 import ResourceTableUtil from '../utils/ResourceTableUtil';
 import UniversePackagesList from '../structs/UniversePackagesList';
 
 const METHODS_TO_BIND = [
   'getHeadline',
+  'getUpgradeCell',
   'getUninstallButton',
   'handleOpenConfirm',
   'handleUninstallCancel',
@@ -123,7 +125,7 @@ class PackagesTable extends mixin(StoreMixin) {
         headerClassName: getClassName,
         heading: function () {},
         prop: 'uninstall',
-        render: this.getUninstallButton,
+        render: this.getUpgradeCell,
         sortable: false
       }
     ];
@@ -134,7 +136,7 @@ class PackagesTable extends mixin(StoreMixin) {
       <colgroup>
         <col />
         <col style={{width: '120px'}} />
-        <col style={{width: '120px'}} />
+        <col style={{width: '330px'}} />
       </colgroup>
     );
   }
@@ -158,14 +160,17 @@ class PackagesTable extends mixin(StoreMixin) {
     );
   }
 
-  getUninstallButton(prop, packageToUninstall) {
+  getUpgradeCell(prop, cosmosPackage) {
+    let uninstallButton = this.getUninstallButton(cosmosPackage);
+
+    if (cosmosPackage.isUpgrading()) {
+      uninstallButton = null;
+    }
+
     return (
-      <div className="flex-align-right">
-        <a
-          className="button button-link button-danger table-display-on-row-hover"
-          onClick={this.handleOpenConfirm.bind(this, packageToUninstall)}>
-          Uninstall
-        </a>
+      <div className="button-collection flush flex-align-right">
+        {uninstallButton}
+        <PackageUpgradeOverview cosmosPackage={cosmosPackage} />
       </div>
     );
   }
@@ -182,6 +187,16 @@ class PackagesTable extends mixin(StoreMixin) {
       <p className="text-error-state">
        {error.getMessage(packageUninstallError.name)}
       </p>
+    );
+  }
+
+  getUninstallButton(packageToUninstall) {
+    return (
+      <a className="button button-link button-danger flush-bottom
+        table-display-on-row-hover"
+        onClick={this.handleOpenConfirm.bind(this, packageToUninstall)}>
+        Uninstall
+      </a>
     );
   }
 
