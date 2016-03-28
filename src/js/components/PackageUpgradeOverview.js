@@ -20,7 +20,9 @@ class PackageUpgradeOverview extends React.Component {
   }
 
   handleAnswerButtonClick() {
-    console.log(this.props.cosmosPackage);
+    if (this.props.onAnswerClick) {
+      this.props.onAnswerClick(this.props.cosmosPackage);
+    }
   }
 
   handlePauseButtonClick() {
@@ -38,7 +40,9 @@ class PackageUpgradeOverview extends React.Component {
   }
 
   handleViewProgressClick() {
-    console.log(this.props.cosmosPackage);
+    if (this.props.onViewProgressClick) {
+      this.props.onViewProgressClick(this.props.cosmosPackage);
+    }
   }
 
   getButtonAction(handler, label, buttonClassName) {

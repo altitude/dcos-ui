@@ -80,6 +80,19 @@ class UniversePackage extends Item {
     return this.get('packageDefinition').version;
   }
 
+  getSelectedUpgradeVersion() {
+    let upgradeVersions = this.getUpgradeVersions();
+    return upgradeVersions[upgradeVersions.length - 1];
+  }
+
+  getUpgradeHealth() {
+    return 'Healthy';
+  }
+
+  hasError() {
+    return false;
+  }
+
   isDecisionPointActive() {
     return this._isDecisionPointActive;
   }
