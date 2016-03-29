@@ -7,10 +7,16 @@ function randomBoolean() {
   return Math.floor(Math.random() * 10) >= 5;
 }
 
+function randomNumber(upperLimit) {
+  return Math.floor(Math.random() * upperLimit) + 1;
+}
+
 class UniversePackage extends Item {
   constructor() {
     super(...arguments);
 
+    this._activeDecisionPoint = randomNumber(3);
+    this._activeBlock = randomNumber(300);
     this._isDecisionPointActive = randomBoolean();
     this._isUpgradeAvailable = randomBoolean();
     this._isUpgradePaused = randomBoolean();
@@ -18,11 +24,11 @@ class UniversePackage extends Item {
   }
 
   getActiveBlock() {
-    return Math.floor(Math.random() * 10) + 1;
+    return this._activeBlock;
   }
 
   getActiveDecisionPoint() {
-    return this.getActiveBlock();
+    return this._activeDecisionPoint;
   }
 
   getBlockCount() {
@@ -30,7 +36,42 @@ class UniversePackage extends Item {
   }
 
   getDecisionPointCount() {
-    return this.getActiveBlock() + 10;
+    return this.getActiveDecisionPoint() + 10;
+  }
+
+  getDecisionPointIndices() {
+    let indices = [];
+
+    for (let i = 0; i < this.getDecisionPointCount(); i++) {
+      indices.push(randomNumber(this.getDecisionPointCount()));
+    }
+
+    return indices;
+  }
+
+  getCurrentPhase() {
+    return {
+      label: 'Pre-flight',
+      status: 'Configuring Update'
+    };
+  }
+
+  getPhases() {
+    return [
+      {
+        label: 'Pre-flight',
+        progress: 100,
+        upgradeState: 'ongoing'
+      }, {
+        label: 'Upgrade',
+        progress: 0,
+        upgradeState: 'upcoming'
+      }, {
+        label: 'Post-flight',
+        progress: 0,
+        upgradeState: 'upcoming'
+      }
+    ];
   }
 
   getIcons() {

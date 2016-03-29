@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UpgradeProgressBar from './charts/UpgradeProgressBar';
+import StackedProgressBar from './charts/StackedProgressBar';
 
 const METHODS_TO_BIND = [
   'handleAnswerButtonClick',
@@ -94,7 +94,7 @@ class PackageUpgradeOverview extends React.Component {
     }
 
     return (
-      <UpgradeProgressBar label={label} labelAction={labelAction}
+      <StackedProgressBar label={label} labelAction={labelAction}
         progress={progress} progressState={progressState} />
     );
   }

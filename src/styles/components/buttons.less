@@ -38,10 +38,15 @@ components/buttons.less
       }
     }
 
+    &.button-extended {
+      padding-left: @base-spacing-unit * 1/2;
+      padding-right: @base-spacing-unit * 1/2;
+    }
+
     &.button-short {
       height: auto;
-      padding-bottom: 4px;
-      padding-top: 4px;
+      padding-bottom: @base-spacing-unit * 1/6;
+      padding-top: @base-spacing-unit * 1/6;
     }
 
     &.button-fixed-width {
