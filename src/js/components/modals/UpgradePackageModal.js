@@ -42,6 +42,7 @@ class UpgradePackageModal extends React.Component {
     return (
       <Modal
         bodyClass="modal-content allow-overflow"
+        dynamicHeight={false}
         innerBodyClass="flush-top flush-bottom"
         maxHeightPercentage={1}
         modalClass={modalClasses}

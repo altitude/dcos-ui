@@ -103,7 +103,7 @@ class PackageUpgradeOverview extends React.Component {
     if (cosmosPackage.isDecisionPointActive()) {
       return (
         <span className="emphasize">
-          {`Decision Point ${cosmosPackage.getActiveDecisionPoint()} of
+          {`Decision Point ${cosmosPackage.getActiveDecisionPoint().index} of
             ${cosmosPackage.getDecisionPointCount()}`}
         </span>
       );
